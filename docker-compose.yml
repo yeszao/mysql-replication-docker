@@ -1,0 +1,40 @@
+services:
+  source:
+    image: mysql:8.0.36
+    container_name: mysql-source
+    restart: unless-stopped
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./conf/source.cnf:/etc/mysql/conf.d/source.cnf
+      - ./data/source:/var/lib/mysql/
+      - ./logs/source:/var/log/mysql/
+      - ./init-source.sql:/docker-entrypoint-initdb.d/init-source.sql
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:12345678}
+    networks:
+      - mysql-network
+
+  replica:
+    image: mysql:8.0.36
+    container_name: mysql-replica
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./conf/replica.cnf:/etc/mysql/conf.d/replica.cnf
+      - ./data/replica:/var/lib/mysql/
+      - ./logs/replica:/var/log/mysql/
+      - ./init-replica.sql:/docker-entrypoint-initdb.d/init-replica.sql
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:12345678}
+    networks:
+      - mysql-network
+
+networks:
+  mysql-network:
+    driver: bridge
