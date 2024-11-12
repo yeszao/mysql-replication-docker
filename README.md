@@ -9,13 +9,38 @@ This repository provides a Docker-based setup for creating a MySQL replication e
     ```bash
     git clone https://github.com/yeszao/mysql-replication-docker.git
     ```
-2. Start the MySQL `source` container on the master machine.
+2. Create `.env` file in the root directory of the repository on both machines.
     ```bash
     cd mysql-replication-docker
-    docker compose up -d source
+    touch .env
     ```
-3. Start the MySQL `replica` container on the replica machine.
+   Change the values of the environment variables base on your needs.
+2. Start the MySQL `master` container on the master machine.
     ```bash
     cd mysql-replication-docker
-    docker compose up -d replica
+    docker compose up -d master
     ```
+3. Start the MySQL `slave` container on the replica machine.
+    ```bash
+    cd mysql-replication-docker
+    docker compose up -d slave
+    ```
+   
+
+# Environment Variables
+The following environment variables are available for configuration in the `.env` file:
+
+**Master MySQL Server**
+- `MASTER_ROOT_PASSWORD`: The password for the root user on the master MySQL server.
+- `MASTER_EXPOSE_PORT`: The port on which the master MySQL server is exposed to host.
+- `MASTER_ROOT_PASSWORD`: The password for the root user on the replica MySQL server.
+- `REPLICATOR_USERNAME`: The username for the replicator user on the replica MySQL server.
+- `REPLICATOR_PASSWORD`: The password for the replicator user on the replica MySQL server.
+
+**Replica MySQL Server**
+- `SLAVE_ROOT_PASSWORD`: The password for the root user on the replica MySQL server.
+- `SLAVE_EXPOSE_PORT`: The port on which the replica MySQL server is exposed to host.
+- `SLAVE_MASTER_HOST`: The hostname or IP address of the master MySQL server.
+- `MYSQL_MASTER_PORT`: The port on which the master MySQL server is listening.
+- `REPLICATOR_USERNAME`: The username for the replicator user on the replica MySQL server.
+- `REPLICATOR_PASSWORD`: The password for the replicator user on the replica MySQL server.
