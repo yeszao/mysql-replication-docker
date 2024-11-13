@@ -1,7 +1,9 @@
 
-# Mysql Replication Docker
+# MySQL Replication Docker
 
-This repository provides a **Docker-based** setup for creating a **MySQL replication** environment with a source (master) and replica (slave) configuration. It simplifies setting up a MySQL database with replication, making it easy to test and deploy in a local or cloud-based environment.
+This repository provides a **Docker-based** setup for creating a **MySQL replication** environment with a source (master) and replica (slave) configuration. 
+
+It simplifies setting up a **MySQL database** with replication, making it easy to test and deploy in a local or cloud-based environment.
 
 
 # Features
