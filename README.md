@@ -41,14 +41,13 @@ The following environment variables are available for configuration in the `.env
 **Master MySQL Server**
 - `MASTER_ROOT_PASSWORD`: The password for the root user on the master MySQL server.
 - `MASTER_EXPOSE_PORT`: The port on which the master MySQL server is exposed to host.
-- `MASTER_ROOT_PASSWORD`: The password for the root user on the replica MySQL server.
 - `REPLICATOR_USERNAME`: The username for the replicator user on the replica MySQL server.
 - `REPLICATOR_PASSWORD`: The password for the replicator user on the replica MySQL server.
 
 **Replica MySQL Server**
 - `SLAVE_ROOT_PASSWORD`: The password for the root user on the replica MySQL server.
 - `SLAVE_EXPOSE_PORT`: The port on which the replica MySQL server is exposed to host.
-- `SLAVE_MASTER_HOST`: The hostname or IP address of the master MySQL server.
+- `MYSQL_MASTER_HOST`: The hostname or IP address of the master MySQL server.
 - `MYSQL_MASTER_PORT`: The port on which the master MySQL server is listening.
 - `REPLICATOR_USERNAME`: The username for the replicator user on the replica MySQL server.
 - `REPLICATOR_PASSWORD`: The password for the replicator user on the replica MySQL server.
