@@ -4,16 +4,16 @@ services:
     container_name: mysql-master
     restart: unless-stopped
     ports:
-      - "${MASTER_EXPOSE_PORT:-3306}:3306"
+      - 3306:3306
     volumes:
       - ./conf/master.cnf:/etc/mysql/conf.d/master.cnf
       - ./init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
       - ./data/master:/var/lib/mysql/
       - ./logs/master:/var/log/mysql/
     environment:
-      MYSQL_ROOT_PASSWORD: ${MASTER_ROOT_PASSWORD:-12345678}
-      REPLICATOR_USERNAME: ${REPLICATOR_USERNAME:-repl_user}
-      REPLICATOR_PASSWORD: ${REPLICATOR_PASSWORD:-repl1234}
+      MYSQL_ROOT_PASSWORD: 12345678
+      REPLICATOR_USERNAME: repl_user
+      REPLICATOR_PASSWORD: repl1234
     networks:
       - mysql-network
 
@@ -22,18 +22,18 @@ services:
     container_name: mysql-slave
     restart: unless-stopped
     ports:
-      - "${SLAVE_EXPOSE_PORT:-3306}:3306"
+      - "3307:3306"
     volumes:
       - ./conf/slave.cnf:/etc/mysql/conf.d/slave.cnf
       - ./init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
       - ./data/slave:/var/lib/mysql/
       - ./logs/slave:/var/log/mysql/
     environment:
-      MYSQL_ROOT_PASSWORD: ${SLAVE_ROOT_PASSWORD:-12345678}
-      MYSQL_MASTER_HOST: ${MYSQL_MASTER_HOST:-master}
-      MYSQL_MASTER_PORT: ${MYSQL_MASTER_PORT:-3306}
-      REPLICATOR_USERNAME: ${REPLICATOR_USERNAME:-repl_user}
-      REPLICATOR_PASSWORD: ${REPLICATOR_PASSWORD:-repl1234}
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_MASTER_HOST: master
+      MYSQL_MASTER_PORT: 3306
+      REPLICATOR_USERNAME: repl_user
+      REPLICATOR_PASSWORD: repl1234
     networks:
       - mysql-network
 

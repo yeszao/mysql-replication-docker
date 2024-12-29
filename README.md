@@ -22,12 +22,11 @@ It simplifies setting up a **MySQL database** with replication, making it easy t
 2. Create `.env` file in the root directory of the repository on both machines.
     ```bash
     cd mysql-replication-docker
-    touch .env
+    cp docker-compose.yml.example docker-compose.yml
     ```
-   Change the values of the environment variables base on your needs.
+   Add the values of the environment variables base on your needs.
 2. Start the MySQL `master` container on the master machine.
     ```bash
-    cd mysql-replication-docker
     docker compose up -d master
     ```
 3. Start the MySQL `slave` container on the replica machine.
